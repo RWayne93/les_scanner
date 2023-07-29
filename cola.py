@@ -2,14 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-def calculate_total_pay_month(loc_code, rank, depend, service, barracks):
+def calculate_total_pay_month(loc_code: str, rank: str, depend: int, service: str, barracks: str) -> float:
     total_pay_month = 0
     s = requests.Session()
 
     now = datetime.now()
-    year = now.year
-    month = now.month
-
+    month = now.month - 1 if now.month > 1 else 12
+    year = now.year if now.month > 1 else now.year - 1
+    
     days = ["01", "16"]
 
     for day in days:
